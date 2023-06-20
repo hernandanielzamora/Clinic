@@ -11,7 +11,13 @@ CREATE TABLE medical_histories (
   admitted_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
   patient_id INT NOT NULL,
   status VARCHAR(120) NOT NULL,
-  CONSTRAINT fk_patient_id FOREIGN KEY (patient_id) REFERENCES patients(id),
+  CONSTRAINT fk_patient_id FOREIGN KEY (patient_id) REFERENCES patients(id)
+);
+
+CREATE TABLE treatments (
+  id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  type VARCHAR(100) NOT NULL,
+  name VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE invoices (
@@ -34,11 +40,6 @@ CREATE TABLE invoice_items (
   CONSTRAINT fk_treatment_id FOREIGN KEY (treatment_id) REFERENCES treatments(id)
 );
 
-CREATE TABLE treatments (
-  id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  type VARCHAR(100) NOT NULL,
-  name VARCHAR(100) NOT NULL
-);
 
 CREATE TABLE medical_treatment_table (
   medical_histories_id INT references medical_histories(id), 
@@ -51,3 +52,5 @@ CREATE INDEX history_patient_index ON medical_histories(patient_id);
 CREATE INDEX invoices_history_index ON invoices(medical_history_id);
 CREATE INDEX invoices_items_index ON invoice_items(invoice_id);
 CREATE INDEX invoicetreatment_index ON invoice_items(treatment_id);
+CREATE INDEX medical_treatment_index ON medical_treatment_table(medical_histories_id);
+CREATE INDEX treatment_medical_index ON medical_treatment_table(treatments_id);
