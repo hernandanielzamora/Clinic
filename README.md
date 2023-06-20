@@ -125,7 +125,6 @@ To make use of the project, you must create or have a vet_clinic database with a
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 <!-- CONTRIBUTING -->
 
 ## 🤝 Contributing <a name="contributing"></a>
